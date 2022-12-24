@@ -18,12 +18,16 @@ async def start(message: types.Message):
                          reply_markup=inline_keyboard.START)
 
 async def help(message: types.Message):
-    await message.answer(text='У меня есть следующие функции:\n1)/start\n2)/help\n3)/happyny\n4)Я повторяю за вами текст\n5)кнопочка с ТОЧНО НЕ рикроллом\n6)Кнопочка в старте которая вызывает хелп\n',
+    await message.answer(text='У меня есть следующие функции:\n1)/start\n2)/help\n3)/happyny\n4)/random\n5)Я повторяю за вами текст\n6)кнопочка с ТОЧНО НЕ рикроллом\n7)Кнопочка в старте которая вызывает хелп\n',
                          reply_markup=inline_keyboard.HELP)
 
 
 async def hny(message: types.Message):    
     await message.answer(text='С новым годом!')
+
+async def rnd(message: types.Message):    
+    a = randrange(100)
+    await message.answer(text=f'Случайное число: {a}')
 
 async def echo(message: types.Message):
     await message.answer(message.text)
@@ -34,6 +38,7 @@ async def register_handlers(dp: Dispatcher):
     dp.register_message_handler(start, commands=['start'])
     dp.register_message_handler(help, commands=['help'])
     dp.register_message_handler(hny, commands=['happyny'])
+    dp.register_message_handler(rnd, commands=['random'])
     dp.register_message_handler(echo)
    
     log.debug('Handlers are registered.')
@@ -58,7 +63,7 @@ async def handler(event, context):
         await bot.answer_callback_query(callback_query.id)
         await bot.send_message(
             callback_query.from_user.id,
-            text='У меня есть следующие функции:\n1)/start\n2)/help\n3)/happyny\n4)Я повторяю за вами текст\n5)кнопочка с ТОЧНО НЕ рикроллом\n6)Кнопочка в старте которая вызывает хелп\n',
+            text='У меня есть следующие функции:\n1)/start\n2)/help\n3)/happyny\n4)/random\n5)Я повторяю за вами текст\n6)кнопочка с ТОЧНО НЕ рикроллом\n7)Кнопочка в старте которая вызывает хелп\n',
             reply_markup=inline_keyboard.HELP
         )   
 
